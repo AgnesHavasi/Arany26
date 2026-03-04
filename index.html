@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Arany János – Szabadulószoba</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f1e6;
+            padding: 0;
+            margin: 0;
+        }
+        header {
+            background: #8b6b32;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1, h2 { margin: 0; }
+        .task {
+            background: #ffffff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 5px solid #c19a4a;
+        }
+        .hidden { display: none; }
+        #timer {
+            font-size: 28px;
+            font-weight: bold;
+            color: #bb0000;
+            text-align: center;
+            margin: 20px 0;
+        }
+        button {
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Arany János – Szabadulószoba</h1>
+    <p>20 percetek van kijutni! Jó játékot!</p>
+</header>
+
+<main>
+
+<div id="timer">20:00</div>
+
+<!-- 1. feladat: Születési év -->
+<div id="task1" class="task">
+    <h2>1. feladat: Mikor született Arany János?</h2>
+    <p>Írd be az évszámot!</p>
+    <input type="text" id="answer1">
+    <button onclick="checkTask1()">Ellenőrzés</button>
+    <p id="feedback1"></p>
+</div>
+
+<!-- 2. feladat: Csodaszarvas -->
+<div id="taskCs" class="task hidden">
+    <h2>2. feladat: Rege a csodaszarvasról</h2>
+    <p>Ki volt az a két testvér, aki a csodaszarvast üldözte a mondában?</p>
+    <p>(Írd be így: Név1 és Név2)</p>
+    <input type="text" id="answerCs">
+    <button onclick="checkTaskCs()">Ellenőrzés</button>
+    <p id="feedbackCs"></p>
+</div>
+
+<!-- 3. feladat: Betűrejtvény -->
+<div id="task2" class="task hidden">
+    <h2>3. feladat: Betűrejtvény</h2>
+    <p>A betűk egy híres Arany-ballada címét rejtik. Tedd helyes sorrendbe!</p>
+    <p><b>N A R Y A   V A R E T É  T</b></p>
+    <input type="text" id="answer2">
+    <button onclick="checkTask2()">Ellenőrzés</button>
+    <p id="feedback2"></p>
+</div>
+
+<!-- 4. feladat: Ki mondta? -->
+<div id="task3" class="task hidden">
+    <h2>4. feladat: Ki mondta?</h2>
+    <p>Melyik Arany-műben szerepel a híres humoros mondás?</p>
+    <blockquote>„Gondolta a fene!”</blockquote>
+    <input type="text" id="answer3">
+    <button onclick="checkTask3()">Ellenőrzés</button>
+    <p id="feedback3"></p>
+</div>
+
+<!-- Befejezés -->
+<div id="endScreen" class="task hidden">
+    <h2>🎉 Gratulálok! Sikeresen kijutottatok!</h2>
+    <p>Ügyesen dolgoztatok Arany János életének és műveinek ismeretében.</p>
+</div>
+
+</main>
+
+<script>
+    // -----------------
+    // 20 perces időzítő
+    // -----------------
+    let timeLeft = 20 * 60;
+    const timerElement = document.getElementById("timer");
+
+    const timer = setInterval(() => {
+        let m = Math.floor(timeLeft / 60);
+        let s = timeLeft % 60;
+        timerElement.textContent =
+            String(m).padStart(2, '0') + ":" +
+            String(s).padStart(2, '0');
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            alert("Lejárt az idő!");
+            document.body.innerHTML = "<h1 style='text-align:center;'>⏳ Lejárt az idő! Próbáljátok újra!</h1>";
+        }
+        timeLeft--;
+    }, 1000);
+
+    // -----------------
+    // 1. feladat
+    // -----------------
+    function checkTask1() {
+        let ans = document.getElementById("answer1").value.trim();
+        if (ans === "1817") {
+            document.getElementById("feedback1").textContent = "Helyes! 🎉";
+            document.getElementById("taskCs").classList.remove("hidden");
+        } else {
+            document.getElementById("feedback1").textContent = "Tipp: 19. század eleje.";
+        }
+    }
+
+    // -----------------
+    // Csodaszarvas feladat
+    // -----------------
+    function checkTaskCs() {
+        let ans = document.getElementById("answerCs").value.trim().toLowerCase();
+
+        if (ans === "hunor és magor" || ans === "hunor es magor") {
+            document.getElementById("feedbackCs").textContent = "Helyes! 🎉";
+            document.getElementById("task2").classList.remove("hidden");
+        } else {
+            document.getElementById("feedbackCs").textContent = "Nem egészen! Tipp: testvérpár.";
+        }
+    }
+
+    // -----------------
+    // 3. feladat — betűrejtvény
+    // -----------------
+    function checkTask2() {
+        let ans = document.getElementById("answer2").value.trim().toLowerCase();
+
+        if (ans === "toldi") {
+            document.getElementById("feedback2").textContent = "Helyes! 🎉";
+            document.getElementById("task3").classList.remove("hidden");
+        } else {
+            document.getElementById("feedback2").textContent = "Nem ez! Gondolj Arany leghíresebb művére.";
+        }
+    }
+
+    // -----------------
+    // 4. feladat – Ki mondta?
+    // -----------------
+    function checkTask3() {
+        let ans = document.getElementById("answer3").value.trim().toLowerCase();
+
+        // helyes válasz
+        if (ans === "bolond istók") {
+            document.getElementById("feedback3").textContent = "Helyes! 🎉";
+            document.getElementById("endScreen").classList.remove("hidden");
+            clearInterval(timer);
+        } else {
+            document.getElementById("feedback3").textContent = "Nem ez az! A humoros epikai műveit nézd!";
+        }
+    }
+</script>
+
+</body>
+</html>
