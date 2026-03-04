@@ -7,8 +7,8 @@
         body {
             font-family: Arial, sans-serif;
             background: #f4f1e6;
-            padding: 0;
             margin: 0;
+            padding: 0;
         }
         header {
             background: #8b6b32;
@@ -21,27 +21,23 @@
             margin: auto;
             padding: 20px;
         }
-        h1, h2 { margin: 0; }
         .task {
-            background: #ffffff;
+            background: white;
             padding: 15px;
-            margin: 15px 0;
+            margin-bottom: 20px;
             border-radius: 8px;
             border-left: 5px solid #c19a4a;
         }
         .hidden { display: none; }
         #timer {
-            font-size: 28px;
-            font-weight: bold;
-            color: #bb0000;
             text-align: center;
+            font-size: 28px;
+            color: #bb0000;
             margin: 20px 0;
         }
         button {
             padding: 8px 16px;
-            font-size: 14px;
             cursor: pointer;
-            margin-top: 5px;
         }
     </style>
 </head>
@@ -49,138 +45,142 @@
 
 <header>
     <h1>Arany János – Szabadulószoba</h1>
-    <p>20 percetek van kijutni! Jó játékot!</p>
+    <p>20 percetek van teljesíteni a küldetést! Sok sikert!</p>
 </header>
 
 <main>
+    <div id="timer">20:00</div>
 
-<div id="timer">20:00</div>
+    <!-- 1. feladat -->
+    <div id="task1" class="task">
+        <h2>1. feladat – Mikor született Arany János?</h2>
+        <p>Írd be az évszámot (négy számjegy)!</p>
+        <input id="answer1">
+        <button onclick="check1()">Ellenőrzés</button>
+        <p id="fb1"></p>
+    </div>
 
-<!-- 1. feladat: Születési év -->
-<div id="task1" class="task">
-    <h2>1. feladat: Mikor született Arany János?</h2>
-    <p>Írd be az évszámot!</p>
-    <input type="text" id="answer1">
-    <button onclick="checkTask1()">Ellenőrzés</button>
-    <p id="feedback1"></p>
-</div>
+    <!-- 2. feladat -->
+    <div id="task2" class="task hidden">
+        <h2>2. feladat – Rege a csodaszarvasról</h2>
+        <p>Hogy hívták a két testvért, akik a csodaszarvast üldözték?</p>
+        <p>Írd be így: Név1 és Név2</p>
+        <input id="answer2">
+        <button onclick="check2()">Ellenőrzés</button>
+        <p id="fb2"></p>
+    </div>
 
-<!-- 2. feladat: Csodaszarvas -->
-<div id="taskCs" class="task hidden">
-    <h2>2. feladat: Rege a csodaszarvasról</h2>
-    <p>Ki volt az a két testvér, aki a csodaszarvast üldözte a mondában?</p>
-    <p>(Írd be így: Név1 és Név2)</p>
-    <input type="text" id="answerCs">
-    <button onclick="checkTaskCs()">Ellenőrzés</button>
-    <p id="feedbackCs"></p>
-</div>
+    <!-- 3. feladat -->
+    <div id="task3" class="task hidden">
+        <h2>3. feladat – Toldi</h2>
+        <p>Mi volt Toldi Miklós fegyvere, amikor legyőzte a cseh vitézt?</p>
+        <p>(egy szó – amit a mezőn talált)</p>
+        <input id="answer3">
+        <button onclick="check3()">Ellenőrzés</button>
+        <p id="fb3"></p>
+    </div>
 
-<!-- 3. feladat: Betűrejtvény -->
-<div id="task2" class="task hidden">
-    <h2>3. feladat: Betűrejtvény</h2>
-    <p>A betűk egy híres Arany-ballada címét rejtik. Tedd helyes sorrendbe!</p>
-    <p><b>N A R Y A   V A R E T É  T</b></p>
-    <input type="text" id="answer2">
-    <button onclick="checkTask2()">Ellenőrzés</button>
-    <p id="feedback2"></p>
-</div>
+    <!-- 4. feladat -->
+    <div id="task4" class="task hidden">
+        <h2>4. feladat – Fogalom</h2>
+        <p>Mi a ballada? Válaszd ki a helyeset:</p>
 
-<!-- 4. feladat: Ki mondta? -->
-<div id="task3" class="task hidden">
-    <h2>4. feladat: Ki mondta?</h2>
-    <p>Melyik Arany-műben szerepel a híres humoros mondás?</p>
-    <blockquote>„Gondolta a fene!”</blockquote>
-    <input type="text" id="answer3">
-    <button onclick="checkTask3()">Ellenőrzés</button>
-    <p id="feedback3"></p>
-</div>
+        <label><input type="radio" name="ballada" value="mese"> Egy vidám mese.</label><br>
+        <label><input type="radio" name="ballada" value="ének"> Egy régi táncos-énekes műfaj.</label><br>
+        <label><input type="radio" name="ballada" value="drámai"> Rövid, szomorú vagy komoly hangú történet, párbeszédekkel.</label><br><br>
 
-<!-- Befejezés -->
-<div id="endScreen" class="task hidden">
-    <h2>🎉 Gratulálok! Sikeresen kijutottatok!</h2>
-    <p>Ügyesen dolgoztatok Arany János életének és műveinek ismeretében.</p>
-</div>
+        <button onclick="check4()">Ellenőrzés</button>
+        <p id="fb4"></p>
+    </div>
 
+    <!-- 5. feladat -->
+    <div id="task5" class="task hidden">
+        <h2>5. feladat – Ki mondta?</h2>
+        <p>Melyik Arany-műhöz kapcsolódik a híres mondás?</p>
+        <blockquote>„Gondolta a fene!”</blockquote>
+        <input id="answer5">
+        <button onclick="check5()">Ellenőrzés</button>
+        <p id="fb5"></p>
+    </div>
+
+    <!-- Befejezés -->
+    <div id="end" class="task hidden">
+        <h2>🎉 Gratulálunk! Sikeresen kijutottatok!</h2>
+        <p>Ügyesen dolgoztatok Arany János életének és műveinek ismeretében!</p>
+    </div>
 </main>
 
 <script>
-    // -----------------
-    // 20 perces időzítő
-    // -----------------
-    let timeLeft = 20 * 60;
-    const timerElement = document.getElementById("timer");
+// ---------------- IDŐZÍTŐ ----------------
+let timeLeft = 20 * 60;
+const timer = setInterval(() => {
+    let m = Math.floor(timeLeft / 60);
+    let s = timeLeft % 60;
+    document.getElementById("timer").textContent =
+        String(m).padStart(2, '0') + ":" + String(s).padStart(2, '0');
 
-    const timer = setInterval(() => {
-        let m = Math.floor(timeLeft / 60);
-        let s = timeLeft % 60;
-        timerElement.textContent =
-            String(m).padStart(2, '0') + ":" +
-            String(s).padStart(2, '0');
-
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            alert("Lejárt az idő!");
-            document.body.innerHTML = "<h1 style='text-align:center;'>⏳ Lejárt az idő! Próbáljátok újra!</h1>";
-        }
-        timeLeft--;
-    }, 1000);
-
-    // -----------------
-    // 1. feladat
-    // -----------------
-    function checkTask1() {
-        let ans = document.getElementById("answer1").value.trim();
-        if (ans === "1817") {
-            document.getElementById("feedback1").textContent = "Helyes! 🎉";
-            document.getElementById("taskCs").classList.remove("hidden");
-        } else {
-            document.getElementById("feedback1").textContent = "Tipp: 19. század eleje.";
-        }
+    if (timeLeft <= 0) {
+        clearInterval(timer);
+        document.body.innerHTML = "<h1 style='text-align:center;'>⏳ Lejárt az idő! Próbáljátok újra!</h1>";
     }
+    timeLeft--;
+}, 1000);
 
-    // -----------------
-    // Csodaszarvas feladat
-    // -----------------
-    function checkTaskCs() {
-        let ans = document.getElementById("answerCs").value.trim().toLowerCase();
+// --------------- FELADATOK ---------------
 
-        if (ans === "hunor és magor" || ans === "hunor es magor") {
-            document.getElementById("feedbackCs").textContent = "Helyes! 🎉";
-            document.getElementById("task2").classList.remove("hidden");
-        } else {
-            document.getElementById("feedbackCs").textContent = "Nem egészen! Tipp: testvérpár.";
-        }
+function check1() {
+    if (document.getElementById("answer1").value === "1817") {
+        document.getElementById("fb1").textContent = "✔️ Helyes!";
+        document.getElementById("task2").classList.remove("hidden");
+    } else {
+        document.getElementById("fb1").textContent = "✖️ Tipp: 19. század eleje.";
     }
+}
 
-    // -----------------
-    // 3. feladat — betűrejtvény
-    // -----------------
-    function checkTask2() {
-        let ans = document.getElementById("answer2").value.trim().toLowerCase();
-
-        if (ans === "toldi") {
-            document.getElementById("feedback2").textContent = "Helyes! 🎉";
-            document.getElementById("task3").classList.remove("hidden");
-        } else {
-            document.getElementById("feedback2").textContent = "Nem ez! Gondolj Arany leghíresebb művére.";
-        }
+function check2() {
+    let a = document.getElementById("answer2").value.toLowerCase().trim();
+    if (a === "hunor és magor" || a === "hunor es magor") {
+        document.getElementById("fb2").textContent = "✔️ Ügyes!";
+        document.getElementById("task3").classList.remove("hidden");
+    } else {
+        document.getElementById("fb2").textContent = "✖️ Két testvér volt…";
     }
+}
 
-    // -----------------
-    // 4. feladat – Ki mondta?
-    // -----------------
-    function checkTask3() {
-        let ans = document.getElementById("answer3").value.trim().toLowerCase();
-
-        // helyes válasz
-        if (ans === "bolond istók") {
-            document.getElementById("feedback3").textContent = "Helyes! 🎉";
-            document.getElementById("endScreen").classList.remove("hidden");
-            clearInterval(timer);
-        } else {
-            document.getElementById("feedback3").textContent = "Nem ez az! A humoros epikai műveit nézd!";
-        }
+function check3() {
+    let a = document.getElementById("answer3").value.toLowerCase().trim();
+    if (a === "dorong" || a === "fadorong") {
+        document.getElementById("fb3").textContent = "✔️ Helyes!";
+        document.getElementById("task4").classList.remove("hidden");
+    } else {
+        document.getElementById("fb3").textContent = "✖️ A mezőn talált fegyver…";
     }
+}
+
+function check4() {
+    let val = document.querySelector('input[name="ballada"]:checked');
+    if (!val) {
+        document.getElementById("fb4").textContent = "Válassz egy lehetőséget!";
+        return;
+    }
+    if (val.value === "drámai") {
+        document.getElementById("fb4").textContent = "✔️ Ügyes vagy!";
+        document.getElementById("task5").classList.remove("hidden");
+    } else {
+        document.getElementById("fb4").textContent = "✖️ Nem ez a helyes!";
+    }
+}
+
+function check5() {
+    let a = document.getElementById("answer5").value.toLowerCase().trim();
+    if (a === "bolond istók" || a === "bolond istok") {
+        document.getElementById("fb5").textContent = "✔️ Helyes!";
+        document.getElementById("end").classList.remove("hidden");
+        clearInterval(timer);
+    } else {
+        document.getElementById("fb5").textContent = "✖️ Tipp: Egy humoros Arany mű.";
+    }
+}
 </script>
 
 </body>
